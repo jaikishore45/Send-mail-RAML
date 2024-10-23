@@ -1,0 +1,89 @@
+#%RAML 1.0
+title: send-email
+version: v1
+mediaType: application/json
+
+/send-email:
+  post:
+    description: Sends an email to one or multiple recipients, CC, BCC, and attachments.
+
+    headers:
+      Content-Type:
+        description: Must be application/json
+        type: string
+        example: application/json
+      Authorization:
+        description: Bearer token for authentication
+        type: string 
+        example: Bearer <token>
+    body:
+      application/json:
+        type: object
+        properties:
+          to:
+            description: Recipient email addresses (comma-separated for multiple recipients)
+            type: string
+            example: "example1@gmail.com, example2@gmail.com"
+            required: true
+          cc:
+            description: CC email addresses
+            type: string | nil
+            example: "example1@gmail.com, example2@gmail.com"
+            required: false
+          bcc:
+            description: BCC email addresses 
+            type: string | nil
+            example: "example1@gmail.com, example2@gmail.com"
+            required: false
+          subject:
+            description: Subject of the email
+            type: string
+            example: "Your subject here"
+            required: true
+          body:
+            description: Email content in HTML or plain text
+            type: string
+            example: "Your email content here"
+            required: true
+          attachments:
+            description: Array of attachments containing filenames and content
+            type: array
+            required: false
+            items:
+              type: object
+              properties:
+                filename:
+                  description: Name of the file to be sent
+                  type: string | nil
+                  example: "document.pdf"
+                content:
+                  description: Base64-encoded content of the file
+                  type: string | nil
+                  example: "File content will be present"
+    responses:
+      200:
+        description: Email sent successfully
+        body:
+          application/json:
+            example: |
+              {
+                "message": "Email sent successfully"
+              }
+      400:
+        description: Missing required fields or invalid data
+        body:
+          application/json:
+            example: |
+              {
+                "error": "Bad Request",
+                "message": "Missing required fields"
+              }
+      500:
+        description: Failed to process the email due to server issues
+        body:
+          application/json:
+            example: |
+              {
+                "error": "Internal Server Error",
+                "message": "Failed to process the email"
+              }

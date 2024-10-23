@@ -1,0 +1,13 @@
+{
+  "main": "send-email.raml",
+  "name": "send-email",
+  "groupId": "e702915c-f9c3-4d24-ae1f-ec97f524a753",
+  "assetId": "send-email",
+  "version": "1.0.8",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0",
+  "organizationId": "e702915c-f9c3-4d24-ae1f-ec97f524a753",
+  "apiVersion": "v1",
+  "originalFormatVersion": "1.0"
+}
